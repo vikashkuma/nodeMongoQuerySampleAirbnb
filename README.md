@@ -37,59 +37,5 @@ Copy code
 npm start
 The application will connect to the MongoDB database and perform the defined queries. Check the console for the output of each query.
 
-Example Queries
-Here are some example queries that you can run:
-
-Find all listings with a specific room type:
-
-javascript
-Copy code
-Listing.find({ "room_type": 'Entire home/apt' })
-  .then(listings => console.log(listings))
-  .catch(err => console.error(err));
-Find the top 5 listings sorted by price (name and price only):
-
-javascript
-Copy code
-Listing.find({})
-  .sort({ price: -1 })
-  .limit(5)
-  .select('name price')
-  .then(listings => console.log(listings))
-  .catch(err => console.error(err));
-Find listings with superhost and their location:
-
-javascript
-Copy code
-Listing.find({ 'host.host_is_superhost': true })
-  .select('name host_location')
-  .then(listings => console.log(listings))
-  .catch(err => console.error(err));
-Aggregation query to find average number of reviews per host:
-
-javascript
-Copy code
-Listing.aggregate([
-  { $group: { _id: '$host.host_id', averageReviews: { $avg: '$number_of_reviews' } } }
-])
-  .then(result => console.log(result))
-  .catch(err => console.error(err));
-Project Structure
-go
-Copy code
-airbnb-listings-analysis/
-├── .gitignore
-├── README.md
-├── package.json
-├── index.js
-└── models/
-    └── listing.js
-Dependencies
-mongoose: Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment.
-License
-This project is licensed under the MIT License. See the LICENSE file for details.
-
-vbnet
-Copy code
 
 This `README.md` provides an overview of the project, installation instructions, usag
